@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Bill Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Black color */
+        }
+        label {
+            font-weight: bold;
+            color: #fff; /* White color */
+            width: 200px; /* Adjust according to your needs */
+            display: inline-block;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 8px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            width: 100px;
+            padding: 8px;
+            margin-left: 10px;
+            border: none;
+            background-color: #f0f0f0;
+            font-weight: bold;
+            color: #333; /* Black color */
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4caf50; /* Green color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green color */
+        }
+        .result {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .result label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333; /* Black color */
+        }
+        .result input[type="text"] {
+            width: calc(100% - 80px);
+            margin-bottom: 10px;
+        }
+        /* Added Styles */
+        #cost, #serviceCharge, #salesTax, #subTotal, #totalCost {
+            color: red; /* Red color */
+        }
+        /* Additional Styles */
+        .prices {
+            background-color: #ff6f61; /* Light red background */
+            color: white; /* White text */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        /* For billForm */
+        #billForm label {
+            color: black; /* Black color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Restaurant Bill Calculator</h2>
+        <!-- Prices Section -->
+        <div class="prices">
+            <label for="fries">Fries: RS:10</label>
+            <label for="noodles">Noodles: RS:20</label>
+            <label for="soup">Soup: RS:15</label>
+            <label for="burger">Burger: RS:25</label>
+            <label for="sandwich">Sandwich: RS:30</label>
+            <label for="drink">Drink: RS:10</label>
+        </div>
+        <form id="billForm">
+            <label for="fries">Fries:</label>
+            <input type="number" id="fries">
+            <br>
+            <label for="noodles">Noodles:</label>
+            <input type="number" id="noodles">
+            <br>
+            <label for="soup">Soup:</label>
+            <input type="number" id="soup">
+            <br>
+            <label for="burger">Burger:</label>
+            <input type="number" id="burger">
+            <br>
+            <label for="sandwich">Sandwich:</label>
+            <input type="number" id="sandwich">
+            <br>
+            <label for="drink">Drink:</label>
+            <input type="number" id="drink">
+            <br>
+            <button type="button" onclick="calculateTotal()">Calculate Total</button>
+        </form>
+        <div class="result">
+            <label>Total Cost:</label>
+            <input type="text" id="cost" readonly>
+            <label>Service Charge:</label>
+            <input type="text" id="serviceCharge" readonly>
+            <label>Sales Tax:</label>
+            <input type="text" id="salesTax" readonly>
+            <label>Sub Total:</label>
+            <input type="text" id="subTotal" readonly>
+            <label>Grand Total:</label>
+            <input type="text" id="totalCost" readonly>
+        </div>
+        <button onclick="resetForm()">Reset</button>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            var fries = parseInt(document.getElementById('fries').value) || 0;
+            var noodles = parseInt(document.getElementById('noodles').value) || 0;
+            var soup = parseInt(document.getElementById('soup').value) || 0;
+            var burger = parseInt(document.getElementById('burger').value) || 0;
+            var sandwich = parseInt(document.getElementById('sandwich').value) || 0;
+            var drink = parseInt(document.getElementById('drink').value) || 0;
+            var total = (fries * 10) + (noodles * 20) + (soup * 15) + (burger * 25) + (sandwich * 30) + (drink * 10);
+            var serviceCharge = Math.round(total * 15 / 100);
+            var salesTax = Math.round(total * 5 / 100);
+            var subTotal = serviceCharge + salesTax;
+            var grandTotal = total + subTotal;
+            document.getElementById('cost').value = total + "/-";
+            document.getElementById('serviceCharge').value = serviceCharge + "/-";
+            document.getElementById('salesTax').value = salesTax + "/-";
+            document.getElementById('subTotal').value = subTotal + "/-";
+            document.getElementById('totalCost').value = grandTotal + "/-";
+        }
+
+        function resetForm() {
+            document.getElementById('billForm').reset();
+            document.getElementById('cost').value = '';
+            document.getElementById('serviceCharge').value = '';
+            document.getElementById('salesTax').value = '';
+            document.getElementById('subTotal').value = '';
+            document.getElementById('totalCost').value = '';
+        }
+    </script>
+</body>
+</html>

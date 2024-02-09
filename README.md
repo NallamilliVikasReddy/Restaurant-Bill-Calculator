@@ -1,0 +1,1 @@
+The Restaurant Bill Calculator is a simple yet efficient tool designed to help customers calculate the total cost of their order at a restaurant. With its user-friendly interface, customers can input the quantity of each item they've ordered, such as fries, noodles, soup, burger, sandwich, and drinks. 
